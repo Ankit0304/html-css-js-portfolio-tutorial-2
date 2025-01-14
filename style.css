@@ -5,10 +5,12 @@
 * {
   margin: 0;
   padding: 0;
+
 }
 
 body {
   font-family: "Poppins", sans-serif;
+  background:lightgrey; ;
 }
 
 html {
@@ -169,11 +171,86 @@ section {
   height: 80vh;
 }
 
-.section__pic-container {
+.home-img .img-box{
+  position: relative;
+  width:32vw;
+  height: 32vw;
+  /* background: red; */
+  border-radius: 50%;
+  padding: 5px;
+  justify-content: center;
   display: flex;
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
+  align-items: center;
+  overflow: hidden;
+}
+
+.home-img .img-box::before,
+.home-img .img-box::after{
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background:conic-gradient(transparent,transparent,transparent,#600ccf);
+  transform: rotate(0deg);
+  animation: rotate 10s linear infinite;
+}
+
+.home-img .img-box::after{
+  animation-delay: -5s;
+}
+
+@keyframes rotate{
+  100%{
+      transform: rotate(360deg);
+  }
+}
+
+.home-img .img-box .img-item{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: #1f242d;
+  border: .1px #1f242d;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.home-img .img-box .img-item img{
+  position: absolute;
+  top: 30px;
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  mix-blend-mode: lighten;
+  /* border-radius: 50%; */
+}
+
+.bar-animation{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: -1;
+}
+
+.bar-animation .bar{
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid red; */
+  background: #1f242d;
+  transform: translateY(-100%);
+  animation: show-bar .5s ease-in-out forwards;
+  animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes show-bar{
+  100%{
+      transform: translateY(0);
+  }
+ 
 }
 
 .section__text {
@@ -190,8 +267,47 @@ section {
 }
 
 .section__text__p2 {
-  font-size: 1.75rem;
+  /* font-size: 1.75rem; */
   margin-bottom: 1rem;
+  font-size: 35px;
+  margin-top: -10px;
+  color: #600ccf;
+  display: inline-block;
+}
+
+.section__text__p2 span{
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: .7px #600ccf;
+  animation: display-text 15s linear infinite;
+  animation-delay: calc(-4s * var(--i)) ;
+}
+
+@keyframes display-text{
+  25%,100%{
+      display: none;
+  }
+}
+
+.section__text__p2 span::before{
+  content: attr(data-text);
+  position: absolute;
+  width: 0;
+  border-right: 2px solid #600ccf;
+  color: #600ccf;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: fill-text 4s linear infinite;
+}
+
+@keyframes fill-text{
+  10%,100%{
+      width: 0;
+  }
+  70%,90%{
+      width: 100%;
+  }
 }
 
 .title {
@@ -285,6 +401,8 @@ section {
 
 .about-pic {
   border-radius: 2rem;
+  width: 400px;
+  height: 400px;
 }
 
 .arrow {
